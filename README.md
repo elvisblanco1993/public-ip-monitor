@@ -1,2 +1,3 @@
-# public-ip-monitor
-Monitor changes on your ISP provided ip.
+# Public IP Monitor
+Monitor and be notified whenever your public ip changes.
+
