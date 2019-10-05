@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Settings | Registrac Public IP Monitor</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a class="d-flex float-right align-items-center text-decoration-none" href="app.html" style="margin-top: 10px;">
+          <i class="icon-arrow-left-circle"></i>
+        </a>
+      </div>
+      <div class="col-md-12 d-flex flex-column align-items-center" style="height: 90vh;">
+        <p id="msg" class="text-success"></p>
+        <form style="width: 100%;">
+          <div class="form-group">
+            <label>Recipients</label>
+            <input class="form-control form-control-sm" id="recipients" type="text">
+            <small class="text-muted">Separate multiple emails by comma.</small>
+          </div>
+          <div class="form-group">
+            <label>Notification Subject</label>
+            <input class="form-control form-control-sm" id="subject" type="text"></div>
+          <div class="form-group">
+            <label>Notification Message</label>
+            <textarea class="form-control form-control-sm" name="message" id="message" rows="6"></textarea>
+            <small class="text-muted">Supports HTML</small>
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Check every</span>
+              </div>
+              <input type="text" class="form-control" id="refresh">
+              <div class="input-group-append">
+                <span class="input-group-text">minutes</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-end">
+            <input class="btn btn-info btn-sm" type="button" name="save" value="Save configuration" onclick="saveSettings()">
+          </div>
+        </form>
+      </div>
+      <small class="text-muted align-bottom" style="margin: 0 auto!important">Made with <i class='icon-heart text-danger'></i> by <a href="https://registrac.page" target="_blank">Registrac LLC</a> </small>
+    </div>
+  </div>
+
+  <script type="application/javascript">
+    function saveSettings() {
+      var recipients = document.getElementById("recipients").value;
+      var subject = document.getElementById("subject").value;
+      var message = document.getElementById("message").value;
+      var refresh = document.getElementById("refresh").value;
+
+      localStorage.setItem("recipients", recipients);
+      localStorage.setItem("subject", subject);
+      localStorage.setItem("message", message);
+      localStorage.setItem("refresh", refresh);
+
+      // Print confirmation message if settings are saved
+      document.getElementById("msg").innerHTML = "Your settings were successfully saved!";
+
+      // Show the saved data in the form fields
+    }
+    document.getElementById('recipients').setAttribute('value', localStorage.getItem('recipients'));
+    document.getElementById('subject').setAttribute('value', localStorage.getItem('subject'));
+    document.getElementById('message').innerHTML = localStorage.getItem('message');
+    document.getElementById('refresh').setAttribute('value', localStorage.getItem('refresh'));
+  </script>
+</body>
+</html>

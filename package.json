@@ -1,0 +1,32 @@
+{
+  "name": "Registrac_Public_IP_Monitor",
+  "version": "1.0.2",
+  "description": "Registrac Public IP Monitor",
+  "icon": "./app/assets/logo.png",
+  "main": "app.js",
+  "scripts": {
+    "start": "electron .",
+    "dist:windows": "build --windows",
+    "dist:linux": "build --linux"
+  },
+  "author": "Registrac LLC <info@registrac.app> (https://registrac.app)",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^4.1.0",
+    "electron-builder": "^20.40.2"
+  },
+  "build": {
+    "appId": "app.registrac.ipmonitor",
+    "win": {
+      "target": "nsis",
+      "icon": "./app/assets/icon.ico"
+    },
+    "linux": {
+      "target": "snap",
+      "icon": "./app/assets/icon.png"
+    }
+  },
+  "dependencies": {
+    "update-electron-app": "^1.5.0"
+  }
+}

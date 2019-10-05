@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+    // If there are no recipients, redirect to Settings Page
+    if (localStorage.getItem("recipients") === null || localStorage.getItem("recipients") === "") {
+      window.location.replace("settings.html");
+    }
+  </script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Registrac Public IP Monitor</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col offset-0" style="margin-top: 10px;">
+        <a class="float-right text-decoration-none" href="settings.html">
+          <i class="icon-settings"></i>
+        </a>
+      </div>
+      <div class="col-md-12 text-center d-flex flex-column justify-content-center" style="height: 90vh;">
+        <p>Your Public IP Address</p>
+        <div class="alert alert-success pulse animated" role="alert"><span><strong id="status"></strong></span></div>
+        <p class="text-info" id="msg"></p>
+      </div>
+      <small class="text-muted" style="margin: 0 auto">Made with <i class='icon-heart text-danger'></i> by <a href="https://registrac.page" target="_blank">Registrac LLC</a> </small>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function getIP(json) {
+      document.getElementById("status").innerHTML = json.ip;
+    }
+  </script> <!-- End of getIp -->
+
+  <script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
+  <script>
+    if (typeof(Storage) !== "undefined") {
+
+      var new_ip = document.getElementById('status').textContent;
+      var current_ip = localStorage.getItem("current_ip");
+
+      if (current_ip !== new_ip) {
+        // Store the new IP
+        localStorage.setItem("current_ip", new_ip);
+        // Show message about IP change
+        document.getElementById("msg").innerHTML = "Your public IP has changed. Please use the new IP Address found above.";
+
+        var the_recipients = localStorage.getItem("recipients");
+        var the_subject = localStorage.getItem("subject");
+        var the_body = localStorage.getItem("message") + "<br><h3> Your new IP is <span style='color:green'>" + new_ip + "</span></h3>";
+
+        // Notify the users about the change
+        Email.send({
+          Host: "smtp.gmail.com",
+          Username: "eblanco@registrac.page",
+          Password: "Bahia#9398!!",
+          To: the_recipients,
+          From: "info@registrac.page",
+          Subject: the_subject,
+          Body: the_body
+        }).then(
+          message => console.log(message)
+        );
+
+      }
+    } else {
+      document.getElementById("result").innerHTML = "Sorry, your app does not support Web Storage...";
+    }
+  </script> <!-- End of e-mail ip -->
+
+  <!-- Refresh App every x minutes -->
+  <script type="text/javascript">
+    if (localStorage.getItem("refresh") === null) {
+      var x_minutes = 60000;
+      // By default will refresh the app every 1 minute
+    } else {
+      var x_minutes = localStorage.getItem("refresh") * 60000;
+      // This will convert the number entered in miliseconds into minutes
+    }
+
+    setTimeout(function(){
+      window.location.reload(1);
+    }, x_minutes);
+  </script>
+</body>
+</html>
