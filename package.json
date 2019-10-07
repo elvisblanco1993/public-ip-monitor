@@ -7,13 +7,16 @@
   "scripts": {
     "start": "electron .",
     "dist:windows": "build --windows",
-    "dist:linux": "build --linux"
+    "dist:linux": "build --linux",
+    "dist:macos": "build --darwin",
+    "package:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/assets/icon.icns --prune=true --out=dist"
   },
-  "author": "Registrac LLC <info@registrac.app> (https://registrac.app)",
+  "author": "Registrac LLC <info@registrac.app> (https://registrac.page)",
   "license": "MIT",
   "devDependencies": {
     "electron": "^4.1.0",
-    "electron-builder": "^20.40.2"
+    "electron-builder": "^20.40.2",
+    "electron-packager": "^14.0.6"
   },
   "build": {
     "appId": "app.registrac.ipmonitor",
@@ -22,11 +25,19 @@
       "icon": "./app/assets/icon.ico"
     },
     "linux": {
-      "target": "snap",
+      "target": "appimage",
       "icon": "./app/assets/icon.png"
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "icon": "./app/assets/icon.icns"
     }
   },
   "dependencies": {
+    "electron-updater": "^4.1.2",
     "update-electron-app": "^1.5.0"
   }
 }
