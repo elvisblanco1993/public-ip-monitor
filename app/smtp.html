@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Settings | Registrac Public IP Monitor</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <a class="float-left align-items-center text-decoration-none" href="settings.html" style="margin-top: 10px;">
+          <i class="icon-arrow-left-circle"></i>
+        </a>
+      </div>
+      <div class="col-md-12 d-flex flex-column align-items-center" style="height: 90vh;">
+        <p id="msg" class="text-success"></p>
+        <form style="width: 100%;">
+          <p>Mail Server Configuration</p>
+          <div class="form-group">
+            <label>SMTP Server</label>
+            <input class="form-control form-control-sm" id="smtp_server" type="text">
+          </div>
+          <div class="form-group">
+            <label>Username</label>
+            <input class="form-control form-control-sm" id="smtp_username" type="email">
+          </div>
+          <div class="form-group">
+            <label>Password</label>
+            <input class="form-control form-control-sm" id="smtp_password" type="password">
+          </div>
+          <div class="form-group d-flex justify-content-end">
+            <input class="btn btn-info btn-sm" type="button" name="save" value="Save configuration" onclick="saveSettings()">
+          </div>
+        </form>
+      </div>
+      <small class="text-muted align-bottom" style="margin: 0 auto!important">Made with <i class='icon-heart text-danger'></i> by <a href="https://registrac.page" target="_blank">Registrac LLC</a> </small>
+    </div>
+  </div>
+
+  <script type="application/javascript">
+    function saveSettings() {
+      var smtp_server = document.getElementById("smtp_server").value;
+      var smtp_username = document.getElementById("smtp_username").value;
+      var smtp_password = document.getElementById("smtp_password").value;
+
+
+      localStorage.setItem("smtp_server", smtp_server);
+      localStorage.setItem("smtp_username", smtp_username);
+      localStorage.setItem("smtp_password", smtp_password);
+
+      // Print confirmation message if settings are saved
+      document.getElementById("msg").innerHTML = "Your settings were successfully saved!";
+
+      // Show the saved data in the form fields
+    }
+    document.getElementById('smtp_server').setAttribute('value', localStorage.getItem('smtp_server'));
+    document.getElementById('smtp_username').setAttribute('value', localStorage.getItem('smtp_username'));
+    document.getElementById('smtp_password').innerHTML = localStorage.getItem('smtp_password');
+  </script>
+</body>
+</html>

@@ -55,15 +55,19 @@
 
         var the_recipients = localStorage.getItem("recipients");
         var the_subject = localStorage.getItem("subject");
+
+        var smtp_server = localStorage.getItem("smtp_server");
+        var smtp_username = localStorage.getItem("smtp_username");
+        var smtp_password = localStorage.getItem("smtp_password");
         var the_body = localStorage.getItem("message") + "<br><h3> Your new IP is <span style='color:green'>" + new_ip + "</span></h3>";
 
         // Notify the users about the change
         Email.send({
-          Host: "smtp.provider.com",
-          Username: "username@something.com",
-          Password: "YourPasswordHere",
+          Host: smtp_server,
+          Username: smtp_username,
+          Password: smtp_password,
+          From: smtp_username,
           To: the_recipients,
-          From: "username@something.com",
           Subject: the_subject,
           Body: the_body
         }).then(
