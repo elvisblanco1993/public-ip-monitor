@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script type="text/javascript">
     // If there are no recipients, redirect to Settings Page
-    if (localStorage.getItem("recipients") === null || localStorage.getItem("recipients") === "") {
-      window.location.replace("settings.html");
+    if (localStorage.getItem("smtp_server") === null || localStorage.getItem("smtp_server") === "") {
+      window.location.replace("init.html");
     }
   </script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
@@ -15,7 +15,6 @@
   <script src="https://smtpjs.com/v3/smtp.js"></script>
   <title>Registrac Public IP Monitor</title>
 </head>
-
 <body>
   <div class="container">
     <div class="row">

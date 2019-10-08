@@ -8,7 +8,7 @@
     "start": "electron .",
     "dist:windows": "build --windows",
     "dist:linux": "build --linux",
-    "dist:macos": "build --darwin",
+    "dist:macos": "build --mac",
     "package:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/assets/icon.icns --prune=true --out=dist"
   },
   "author": "Registrac LLC <info@registrac.app> (https://registrac.page)",
@@ -29,11 +29,9 @@
       "icon": "./app/assets/icon.png"
     },
     "mac": {
-      "target": [
-        "dmg",
-        "zip"
-      ],
-      "icon": "./app/assets/icon.icns"
+      "target": "default",
+      "icon": "./app/assets/icon.icns",
+      "category": "public.app-category.utilities"
     }
   },
   "dependencies": {

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/simple-line-icons/2.4.1/css/simple-line-icons.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+  <title>Initial Setup | Registrac Public IP Monitor</title>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col" style="margin-top: 10px;">
+        Initial Setup
+        <a class="float-right align-items-center text-decoration-none" href="app.html">
+          Done
+        </a>
+      </div>
+      <div class="col-md-12 d-flex flex-column align-items-center" style="height: 90vh;">
+        <small id="msg"></small>
+        <form style="width: 100%;">
+          <div class="form-group">
+            <label>
+              <small>SMTP Server <span class="text-danger">*</span></small>
+            </label>
+            <input class="form-control form-control-sm" id="smtp_server" type="text">
+          </div>
+          <div class="form-group">
+            <label>
+              <small>Username <span class="text-danger">*</span></small>
+            </label>
+            <input class="form-control form-control-sm" id="smtp_username" type="email">
+          </div>
+          <div class="form-group">
+            <label>
+              <small>Password <span class="text-danger">*</span></small>
+            </label>
+            <input class="form-control form-control-sm" id="smtp_password" type="password">
+          </div>
+          <div class="form-group">
+            <div class="input-group input-group-sm mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Check every <span class="text-danger">*</span></span>
+              </div>
+              <input type="text" class="form-control" id="refresh">
+              <div class="input-group-append">
+                <span class="input-group-text">minutes</span>
+              </div>
+            </div>
+          </div>
+          <hr>
+          <div class="form-group">
+            <label><small>Recipients <span class="text-danger">*</span></small></label>
+            <input class="form-control form-control-sm" id="recipients" type="text">
+            <small class="text-muted">Separate multiple emails by comma.</small>
+          </div>
+          <div class="form-group">
+            <label><small>Message Subject</small></label>
+            <input class="form-control form-control-sm" id="subject" type="text"></div>
+          <div class="form-group d-flex justify-content-end">
+            <input class="btn btn-info btn-sm" type="button" name="save" value="Save configuration" onclick="saveSettings()">
+          </div>
+        </form>
+      </div>
+      <small class="text-muted align-bottom" style="margin: 0 auto!important">Made with <i class='icon-heart text-danger'></i> by <a href="https://registrac.page" target="_blank">Registrac LLC</a> </small>
+    </div>
+  </div>
+
+  <script type="application/javascript">
+    function saveSettings() {
+      var smtp_server = document.getElementById("smtp_server").value;
+      var smtp_username = document.getElementById("smtp_username").value;
+      var smtp_password = document.getElementById("smtp_password").value;
+      var recipients = document.getElementById("recipients").value;
+      var subject = document.getElementById("subject").value;
+      var refresh = document.getElementById("refresh").value;
+
+      if (smtp_server !== "" && smtp_username !== "" && smtp_password !== "" && recipients !== "") {
+        localStorage.setItem("smtp_server", smtp_server);
+        localStorage.setItem("smtp_username", smtp_username);
+        localStorage.setItem("smtp_password", smtp_password);
+        localStorage.setItem("recipients", recipients);
+        localStorage.setItem("subject", subject);
+        localStorage.setItem("refresh", refresh);
+        document.getElementById("msg").innerHTML = "<span class='text-success'>Saved! Click Done to continue</span>";
+
+      } else {
+        // Print confirmation message if settings are saved
+        document.getElementById("msg").innerHTML = "<span class='text-danger'>Oops. You are missing some information</span>";
+      }
+
+      // Show the saved data in the form fields
+    }
+    if (localStorage.getItem('smtp_server') !== null && localStorage.getItem('smtp_username') !== null) {
+      document.getElementById('smtp_server').setAttribute('value', localStorage.getItem('smtp_server'));
+      document.getElementById('smtp_username').setAttribute('value', localStorage.getItem('smtp_username'));
+      document.getElementById('smtp_password').innerHTML = localStorage.getItem('smtp_password');
+      document.getElementById('recipients').setAttribute('value', localStorage.getItem('recipients'));
+      document.getElementById('subject').setAttribute('value', localStorage.getItem('subject'));
+      document.getElementById('refresh').setAttribute('value', localStorage.getItem('refresh'));
+    }
+  </script>
+</body>
+</html>
