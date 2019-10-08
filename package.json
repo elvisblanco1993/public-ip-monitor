@@ -6,10 +6,9 @@
   "main": "app.js",
   "scripts": {
     "start": "electron .",
-    "dist:windows": "build --windows",
-    "dist:linux": "build --linux",
-    "dist:macos": "build --mac",
-    "package:macos": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=./app/assets/icon.icns --prune=true --out=dist"
+    "dist:windows": "electron-builder --windows",
+    "dist:linux": "electron-builder --linux",
+    "dist:macos": "electron-builder --mac"
   },
   "author": "Registrac LLC <info@registrac.app> (https://registrac.page)",
   "license": "MIT",
