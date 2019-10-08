@@ -33,9 +33,5 @@
       "icon": "./app/assets/icon.icns",
       "category": "public.app-category.utilities"
     }
-  },
-  "dependencies": {
-    "electron-updater": "^4.1.2",
-    "update-electron-app": "^1.5.0"
   }
 }
