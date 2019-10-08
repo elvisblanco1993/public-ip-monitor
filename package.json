@@ -1,6 +1,6 @@
 {
   "name": "Registrac_Public_IP_Monitor",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Registrac Public IP Monitor",
   "icon": "./app/assets/logo.png",
   "main": "app.js",
