@@ -27,10 +27,30 @@
         <p>Your Public IP Address</p>
         <div class="alert alert-success pulse animated" role="alert"><span><strong id="status"></strong></span></div>
         <p class="text-info" id="msg"></p>
+        <span class="badge badge-warning" id="messages"></span>
       </div>
-      <small class="text-muted" style="margin: 0 auto">Made with <i class='icon-heart text-danger'></i> by <a href="https://registrac.page" target="_blank">Registrac LLC</a> </small>
+      <small class="text-muted" style="margin: 0 auto">Made with
+        <i class='icon-heart text-danger'></i>
+        by <a href="https://registrac.page" target="_blank">Registrac LLC</a> - <span id="version"></span>
+      </small>
     </div>
   </div>
+
+  <!-- Get version and Show new version information -->
+  <script>
+    // Display the current version
+    let version = window.location.hash.substring(1);
+    document.getElementById('version').innerText = version;
+    // Listen for messages
+    const {ipcRenderer} = require('electron');
+    ipcRenderer.on('message', function(event, text) {
+      var container = document.getElementById('messages');
+      var message = document.createElement('div');
+      message.innerHTML = text;
+      container.appendChild(message);
+    })
+  </script>
+  <!-- End of Get Version... -->
 
   <script type="text/javascript">
     function getIP(json) {
