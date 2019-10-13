@@ -2,7 +2,8 @@
 Monitor and be notified whenever your public ip changes.
 
 ## Get started
-Assuming you already installed npm and nodejs, follow these steps:
+Note: Please note this tool uses [ipify](https://www.ipify.org/) and [smtpjs](https://www.smtpjs.com/) APIs.</br>
+Make sure you install the latest version of [NodeJS](https://nodejs.org) before you begin:
 1. Open a terminal window in the root directory of the project and run: npm install.
 2. To execute the application, run: npm run start.
 3. To compile for Windows: run build:windows.
